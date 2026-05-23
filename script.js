@@ -6,8 +6,22 @@ function handleSubmit(event) {
     const form = event.target;
     const name = form.querySelector('input[type="text"]').value;
     const email = form.querySelector('input[type="email"]').value;
-    const phone = form.querySelector('input[type="phone"]').value;
+    const phone = form.querySelector('input[type="tel"]').value;
     const message = form.querySelector('textarea').value;
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('يرجى إدخال بريد إلكتروني صحيح');
+        return;
+    }
+    
+    // Validate phone format
+    const phoneRegex = /^\+?[\d\s-()]+$|^\d{7,}$/;
+    if (!phoneRegex.test(phone)) {
+        alert('يرجى إدخال رقم هاتف صحيح');
+        return;
+    }
     
     // Validate form
     if (!name || !email || !phone || !message) {
@@ -71,12 +85,4 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Mobile menu toggle
-function toggleMobileMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    if (navLinks) {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    }
-}
-
-console.log('Website loaded successfully!');
+console.log('✅ Website loaded successfully!');
